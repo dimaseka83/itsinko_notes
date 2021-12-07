@@ -19,10 +19,15 @@
 
         let arr = [];
 
-        $.each($('.noseri'), function (indexInArray, valueOfElement) { 
-            var a = $(this).val();
-            arr.push(a);
-        });
+        const data = scanProduk.$('.noseri').map(function() {
+                    return $(this).val();
+                }).get();
+
+                data.forEach(function(item) {
+                    if (item != '') {
+                        arr.push(item);
+                    }
+                })
 
 
         const count = arr =>

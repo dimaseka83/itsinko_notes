@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <input type="text" class="noseri"><br>
+    <input type="text" class="noseri"><br>
+    <input type="text" class="noseri"><br>
+    <input type="text" class="noseri"><br>
+    <button id="click">Click</button>
+</body>
+<script>
+    $(document).on('click','#click', function () {
+
+        let arr = [];
+
+        $.each($('.noseri'), function (indexInArray, valueOfElement) { 
+            var a = $(this).val();
+            arr.push(a);
+        });
+
+
+        const count = arr =>
+        arr.reduce((a, b) => ({ ...a,
+            [b]: (a[b] || 0) + 1
+        }), {})
+
+        const duplicates = dict =>
+        Object.keys(dict).filter((a) => dict[a] > 1)
+
+        if (duplicates(count(arr)).length > 0) {
+            $('.noseri').filter(function () {
+                return $(this).val() == duplicates(count(arr))[0];
+            }).css('background-color', 'red');
+        } else {
+            $('.noseri').css('background-color', 'green');
+        }
+    });
+
+</script>
+</html>
